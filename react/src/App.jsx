@@ -1,12 +1,42 @@
-import { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import './App.css'
 import Header from './partials/Header/Header'
 import Footer from './partials/Footer/Footer'
 import { TrashIcon } from '@heroicons/react/24/outline'
+import Service from './API/Service'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 function App() {
+  const [bookings, setBookings] = useState([]);
+  const [takenDates, setTakenDates] = useState([]);
+  const [arrivalDate, setArrivalDate]= useState(null);
+  const [departureDate, setDepartureDate]= useState(null);
+  const [email, setEmail]= useState("");
+  const [phone, setPhone]= useState("");
 
+  useEffect(() => {
+    const fetchBookings = async () => {
+      const result = await Service.getBookings();
+      setBookings(result.data);
+    };
+    const getTakeDates = async () => {
+      const result = await Service.getTakenDates();
+      setTakenDates(result);
+    };
+    getTakeDates();
+    fetchBookings();
+  }, []);
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+  
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
+  };
+  
   return (
     <div className='app'>
       <Header/>
@@ -30,19 +60,25 @@ function App() {
               <div className="form-items">
                 <div className="form-item">
                   <label className="form-label" htmlFor="arrival-date">Дата заїзду:</label>
-                  <input className="form-input" type="text" id="arrival-date" />
+                  <DatePicker className="form-input" selected={arrivalDate} 
+                    onChange={date => setArrivalDate(date)}
+                    filterDate={date => !takenDates.includes(date.toISOString().split('T')[0])}
+                    />
                 </div>
                 <div className="form-item">
                   <label className="form-label" htmlFor="departure-date">Дата виїзду:</label>
-                  <input className="form-input" type="text" id="departure-date" />
+                  <DatePicker className="form-input" selected={departureDate} 
+                  onChange={date => setDepartureDate(date)}
+                  filterDate={date => !takenDates.includes(date.toISOString().split('T')[0])}
+                    />
                 </div>
                 <div className="form-item">
                   <label className="form-label" htmlFor="phone-number">Номер телефону:</label>
-                  <input className="form-input" type="text" id="phone-number" />
+                  <input className="form-input" type="text" id="phone-number" value={phone} onChange={handlePhoneChange} />
                 </div>
                 <div className="form-item">
                   <label className="form-label" htmlFor="email">Email:</label>
-                  <input className="form-input" type="text" id="email" />
+                  <input className="form-input" type="text" id="email" value={email} onChange={handleEmailChange} />
                 </div>
               </div>
               <div className='book-div'>
@@ -75,14 +111,16 @@ function App() {
               </tr>
             </thead>
             <tbody>
-            <tr>
-              <td className='booking-item'>2023-06-30</td>
-              <td className='booking-item'>2023-07-05</td>
-              <td className='booking-status'>Успішно</td>
-              <td className='booking-item'>
-                <TrashIcon className='trash-icon' />
-              </td>
-            </tr>
+            {bookings.map((booking) => (
+              <tr key={booking.id} className='booking-row'>
+                <td className="booking-item">{booking.arrivalDate}</td>
+                <td className="booking-item">{booking.departureDate}</td>
+                <td className='booking-status'>Успішно</td>
+                <td className="booking-item">
+                  <TrashIcon className="trash-icon" />
+                </td>
+              </tr>
+            ))}
             </tbody>
           </table>
           </div>

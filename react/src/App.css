@@ -94,6 +94,7 @@ body {
 .form-input {
   width: 280px;
   border: none;
+  background: #FEFBF9;;
   border-bottom: 1px solid #AE8B70;
   padding: 5px;
 }
@@ -182,14 +183,11 @@ body {
 
 .history-table {
   width: 100%;
-}
-
-.history-table table {
-  width: 100%;
   border-collapse: collapse;
 }
 
 .history-table th {
+  border: 0px;
   color: #9DB1B0;
   font-size: 14px;
   font-family: Avenir Next Cyr;
@@ -197,6 +195,16 @@ body {
   font-weight: 700;
   line-height: 20px;
   text-transform: uppercase;
+}
+
+.history-table th,
+  .history-table td {
+    padding: 8px;
+ }
+
+ .booking-row {
+  background-color: white;
+  border-bottom: 10px solid #FEFBF9;
 }
 
 .booking-item {
@@ -207,7 +215,6 @@ body {
   font-weight: 700;
   line-height: 20px;
   text-transform: uppercase;
-  background-color: #FFF;
   text-align: center;
 }
 

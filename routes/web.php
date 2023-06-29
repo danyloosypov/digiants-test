@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('/', function () {
-    return ["hello" => 'hello'];
-});
+Route::get('/bookings',[BookingController::class, 'index']);
+
+Route::get('/takendates',[BookingController::class, 'getTakenDates']);

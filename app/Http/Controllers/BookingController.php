@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking; // Assuming you have a Booking model
+use Carbon\Carbon;
+
 
 class BookingController extends Controller
 {
@@ -12,8 +14,28 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::all();
+        $bookings = Booking::paginate(10); // Specify the number of records per page (e.g., 10)
         return response()->json($bookings);
+    }
+
+    public function getTakenDates() {
+        $bookings = Booking::all();
+        $disabledDates = [];
+
+        foreach ($bookings as $booking) {
+            $startDate = Carbon::parse($booking->arrivalDate);
+            $endDate = Carbon::parse($booking->departureDate);
+
+            $datesInRange = [];
+
+            while ($startDate <= $endDate) {
+                $datesInRange[] = $startDate->toDateString();
+                $startDate->addDay();
+            }
+
+            $disabledDates = array_merge($disabledDates, $datesInRange);
+        }
+        return response()->json($disabledDates);
     }
 
     /**
