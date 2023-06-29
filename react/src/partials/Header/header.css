@@ -1,0 +1,63 @@
+.header-container {
+    margin: 40px 100px;
+}
+
+.header-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Adjust vertical alignment */
+    width: 100%;
+}
+
+.header-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-phone {
+    color: #293C39;
+    font-size: 16px;
+    font-family: 'Avenir Next Cyr', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    text-transform: uppercase;
+}
+
+.header-logo {
+    color: #AE8B70;
+    font-size: 80px;
+    font-family: 'Caravan', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    padding-bottom: 40px;
+}
+
+.header-btn {
+    width: 200px;
+    height: 50px;
+    flex-shrink: 0;
+    font-family: 'Avenir Next Cyr', sans-serif;
+    color: #AE8B70;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    text-transform: uppercase;
+    border-radius: 10000px;
+    border: 1px solid #AE8B70;
+    transition: background-color 0.3s ease;
+}
+
+.header-btn:hover {
+    background-color: #AE8B70;
+    color: #FFFFFF;
+}
+
+.header-line {
+    width: 100%;
+    height: 1px;
+    background: #9DB1B0;
+    margin-top: 60px; /* Adds some spacing between the header items and the horizontal rule */
+}

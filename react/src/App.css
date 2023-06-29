@@ -1,0 +1,229 @@
+body {
+  padding: 0;
+  margin: 0;
+  background: #FEFBF9;;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.container {
+  margin: 40px 100px;
+}
+
+.logo-text {
+  margin: 100px 0;
+}
+
+.text-upper {
+  color: #293C39;
+  font-size: 70px;
+  font-family: Cormorant Garamond;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-left: 170px;
+}
+
+.text-lower {
+  color: #293C39;
+  font-size: 70px;
+  font-family: Cormorant Garamond;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-left: 400px;
+}
+
+.shape {
+  width: 532.355px;
+  height: 203.392px;
+  transform: rotate(-9.535deg);
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid #ae8b70;
+  margin-left: 600px;
+  margin-top: -200px;
+}
+
+
+.shape-text {
+  color: #AE8B70;
+  font-size: 90px;
+  font-family: Caravan;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 85px;
+  margin-left: 800px;
+  margin-top: -200px;
+}
+
+.booking-form {
+  margin-top: 200px;
+  
+}
+
+.book-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.form-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  color: #293C39;
+  font-family: Avenir Next Cyr;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 280px;
+  border: none;
+  border-bottom: 1px solid #AE8B70;
+  padding: 5px;
+}
+
+.form-input:hover {
+  border-color: #AE8B70;
+}
+
+.book-btn {
+  width: 260px;
+  height: 65px;
+  flex-shrink: 0;
+  border-radius: 10000px;
+  border: 1px solid #AE8B70;
+  background: #AE8B70;
+  color: #FFF;
+  text-align: center;
+  font-size: 18px;
+  font-family: Avenir Next Cyr;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+
+}
+
+
+.book-btn:hover {
+  background-color: #FFF;
+  color: #111;
+}
+
+
+.history-text {
+  margin: 150px 0px;
+}
+
+.history-text-upper {
+  color: #293C39;
+  font-size: 50px;
+  font-family: Cormorant Garamond;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 70px;
+  text-transform: uppercase;
+}
+
+.history-text-lower {
+  display: flex;
+  width: 539px;
+  flex-direction: column;
+  flex-shrink: 0;
+  color: #293C39;
+  font-size: 50px;
+  font-family: Cormorant Garamond;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 70px;
+  text-transform: uppercase;
+  margin-left: 110px;
+}
+
+.history-shape {
+  width: 362.288px;
+  height: 150.738px;
+  transform: rotate(-9.535deg);
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid #ae8b70;
+  margin-left: 150px;
+  margin-top: -150px;
+}
+
+
+.history-shape-text {
+  color: #AE8B70;
+  font-size: 90px;
+  font-family: Caravan;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 85px;
+  margin-left: 300px;
+  margin-top: -170px;
+}
+
+.history-table {
+  width: 100%;
+}
+
+.history-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-table th {
+  color: #9DB1B0;
+  font-size: 14px;
+  font-family: Avenir Next Cyr;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+.booking-item {
+  color: #293C39;
+  font-size: 14px;
+  font-family: Avenir Next Cyr;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  text-transform: uppercase;
+  background-color: #FFF;
+  text-align: center;
+}
+
+.trash-icon {
+  width: 16px;
+  height: 16px;
+  color: #111;
+}
+
+.booking-status {
+  color: #26B69F;
+  font-size: 14px;
+  font-family: Avenir Next Cyr;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  text-transform: uppercase;
+  text-align: center;
+}
