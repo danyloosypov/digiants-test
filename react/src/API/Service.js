@@ -1,12 +1,20 @@
 import axios from 'axios';
 
-
 export default class Service {
 
     static async getBookings() {
         try {
             const data = await axios.get('http://localhost/bookings/')
             return data.data
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
+    static async createBooking(data) {
+        try {
+            const response = await axios.post('http://localhost/bookings/create', data)
+            return response
         } catch (error) {
             console.log(error)
         }

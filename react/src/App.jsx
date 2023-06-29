@@ -36,6 +36,62 @@ function App() {
   const handlePhoneChange = (event) => {
     setPhone(event.target.value);
   };
+
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Add leading zero if necessary
+    const day = String(date.getDate()).padStart(2, '0'); // Add leading zero if necessary
+  
+    return `${year}-${month}-${day}`;
+  };
+  
+
+  const handleFormSubmit = (event) => {  
+    event.preventDefault();
+    const arrDate = arrivalDate.toISOString().split('T')[0];
+    const depDate = departureDate.toISOString().split('T')[0];
+    // Create a booking object with the necessary data
+    const booking = {
+      arrivalDate: formatDate(arrivalDate),
+      departureDate: formatDate(departureDate),
+      phoneNumber: phone,
+      email: email
+    };
+
+
+    const newDates = [];
+    const start = new Date(booking.arrivalDate);
+    const end = new Date(booking.departureDate);
+    const currentDate = new Date(start);
+
+    while (currentDate <= end) {
+      newDates.push(currentDate.toISOString().split('T')[0]);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    const updatedTakenDates = [...takenDates, arrivalDate, departureDate, ...newDates];
+  
+    // Call the createBooking function from the service
+    Service.createBooking(booking)
+      .then((response) => {
+        if(response.status === 201) {
+          const newBooking = response.data;
+          setBookings(prevBookings => [...prevBookings, newBooking]);
+          setTakenDates(updatedTakenDates);
+          alert('Booking created');
+          setEmail("");
+          setPhone("");
+          setArrivalDate(null);
+          setDepartureDate(null);
+        } else {
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Error creating booking');
+      });
+  };
   
   return (
     <div className='app'>
@@ -56,21 +112,52 @@ function App() {
             </div>
           </div>
           <div className="booking-form">
-            <form method="POST" action="">
+            <form method="POST" action="" onSubmit={handleFormSubmit}>
               <div className="form-items">
                 <div className="form-item">
                   <label className="form-label" htmlFor="arrival-date">Дата заїзду:</label>
-                  <DatePicker className="form-input" selected={arrivalDate} 
+                  <DatePicker
+                    className="form-input"
+                    selected={arrivalDate}
                     onChange={date => setArrivalDate(date)}
-                    filterDate={date => !takenDates.includes(date.toISOString().split('T')[0])}
-                    />
+                    filterDate={date => {
+                      const selectedDate = new Date(date);
+                      for (const takenDate of takenDates) {
+                        const compareDate = new Date(takenDate);
+                        if (
+                          selectedDate.getFullYear() === compareDate.getFullYear() &&
+                          selectedDate.getMonth() === compareDate.getMonth() &&
+                          selectedDate.getDate() === compareDate.getDate()
+                        ) {
+                          return false; // Date should be disabled
+                        }
+                      }
+                      return true; // Date should be enabled
+                    }}
+                  />
+
                 </div>
                 <div className="form-item">
                   <label className="form-label" htmlFor="departure-date">Дата виїзду:</label>
-                  <DatePicker className="form-input" selected={departureDate} 
-                  onChange={date => setDepartureDate(date)}
-                  filterDate={date => !takenDates.includes(date.toISOString().split('T')[0])}
-                    />
+                  <DatePicker
+                    className="form-input"
+                    selected={departureDate}
+                    onChange={date => setDepartureDate(date)}
+                    filterDate={date => {
+                      const selectedDate = new Date(date);
+                      for (const takenDate of takenDates) {
+                        const compareDate = new Date(takenDate);
+                        if (
+                          selectedDate.getFullYear() === compareDate.getFullYear() &&
+                          selectedDate.getMonth() === compareDate.getMonth() &&
+                          selectedDate.getDate() === compareDate.getDate()
+                        ) {
+                          return false; // Date should be disabled
+                        }
+                      }
+                      return true; // Date should be enabled
+                    }}
+                  />
                 </div>
                 <div className="form-item">
                   <label className="form-label" htmlFor="phone-number">Номер телефону:</label>

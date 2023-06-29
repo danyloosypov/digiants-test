@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking; // Assuming you have a Booking model
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 
 
 class BookingController extends Controller
@@ -14,7 +15,7 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::paginate(10); // Specify the number of records per page (e.g., 10)
+        $bookings = Booking::orderBy('id', 'desc')->paginate(10);
         return response()->json($bookings);
     }
 
@@ -52,7 +53,11 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $booking = Booking::create($request->all());
-        return response()->json($booking, 201);
+
+        $response = new Response($booking, 201);
+        
+        // Return the JSON response
+        return $response;
     }
 
     /**

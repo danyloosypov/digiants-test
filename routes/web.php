@@ -21,4 +21,10 @@ Route::get('/', function () {
 
 Route::get('/bookings',[BookingController::class, 'index']);
 
+Route::post('/bookings/create', [BookingController::class, 'store']);
+
 Route::get('/takendates',[BookingController::class, 'getTakenDates']);
+
+Route::get('/csrf-token', function () {
+    return response()->json(['csrfToken' => csrf_token()]);
+});
