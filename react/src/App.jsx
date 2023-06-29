@@ -74,7 +74,7 @@ function App() {
       .then((response) => {
         if(response.status === 201) {
           const newBooking = response.data;
-          setBookings(prevBookings => [...prevBookings, newBooking]);
+          setBookings(prevBookings => [newBooking, ...prevBookings]);
           setTakenDates(updatedTakenDates);
           alert('Booking created');
           setEmail("");
