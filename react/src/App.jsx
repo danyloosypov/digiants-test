@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     const fetchBookings = async () => {
       const result = await Service.getBookings();
-      setBookings(result.data);
+      setBookings(result);
     };
     const getTakeDates = async () => {
       const result = await Service.getTakenDates();
@@ -48,8 +48,6 @@ function App() {
 
   const handleFormSubmit = (event) => {  
     event.preventDefault();
-    const arrDate = arrivalDate.toISOString().split('T')[0];
-    const depDate = departureDate.toISOString().split('T')[0];
     // Create a booking object with the necessary data
     const booking = {
       arrivalDate: formatDate(arrivalDate),

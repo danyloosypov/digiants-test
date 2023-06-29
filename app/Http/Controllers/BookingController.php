@@ -15,7 +15,7 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::orderBy('id', 'desc')->paginate(10);
+        $bookings = Booking::orderBy('id', 'desc')->get();
         return response()->json($bookings);
     }
 
