@@ -6,6 +6,7 @@ import { TrashIcon } from '@heroicons/react/24/outline'
 import Service from './API/Service'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Loading from './components/Loading/Loading'
 
 
 function App() {
@@ -15,15 +16,20 @@ function App() {
   const [departureDate, setDepartureDate]= useState(null);
   const [email, setEmail]= useState("");
   const [phone, setPhone]= useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchBookings = async () => {
+      setIsLoading(true);
       const result = await Service.getBookings();
       setBookings(result);
+      setIsLoading(false);
     };
     const getTakeDates = async () => {
+      setIsLoading(true);
       const result = await Service.getTakenDates();
       setTakenDates(result);
+      setIsLoading(false);
     };
     getTakeDates();
     fetchBookings();
@@ -44,10 +50,36 @@ function App() {
   
     return `${year}-${month}-${day}`;
   };
+
+  const handleDeleteBooking = (bookingId) => {
+    setIsLoading(true);
+    Service.deleteBooking(bookingId)
+      .then((response) => {
+        // Handle the successful deletion
+        if(response.status === 201) {
+          setBookings((prevBookings) =>
+            prevBookings.filter((booking) => booking.id !== bookingId)
+          );
+          alert('Booking deleted');
+        } else {
+          console.log(response);
+        }
+        setIsLoading(false);
+        // You may want to update the state or fetch the updated list of bookings
+      })
+      .catch((error) => {
+        // Handle any errors
+        alert('Something went wrong');
+        console.error('Error deleting booking:', error);
+        setIsLoading(false);
+      });
+  };
+  
   
 
   const handleFormSubmit = (event) => {  
     event.preventDefault();
+    setIsLoading(true);
     // Create a booking object with the necessary data
     const booking = {
       arrivalDate: formatDate(arrivalDate),
@@ -84,16 +116,20 @@ function App() {
         } else {
           console.log(response);
         }
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
         alert('Error creating booking');
+        setIsLoading(false);
       });
+
   };
   
   return (
     <div className='app'>
       <Header/>
+      {isLoading && <Loading />}
         <div className='container'>
           <div className="logo-text">
             <div className='text-upper'>
@@ -202,7 +238,7 @@ function App() {
                 <td className="booking-item">{booking.departureDate}</td>
                 <td className='booking-status'>Успішно</td>
                 <td className="booking-item">
-                  <TrashIcon className="trash-icon" />
+                  <TrashIcon className="trash-icon" onClick={() => handleDeleteBooking(booking.id)} />
                 </td>
               </tr>
             ))}

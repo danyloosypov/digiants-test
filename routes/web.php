@@ -25,6 +25,8 @@ Route::post('/bookings/create', [BookingController::class, 'store']);
 
 Route::get('/takendates',[BookingController::class, 'getTakenDates']);
 
+Route::delete('/bookings/delete/{id}', [BookingController::class, 'destroy']);
+
 Route::get('/csrf-token', function () {
     return response()->json(['csrfToken' => csrf_token()]);
 });
