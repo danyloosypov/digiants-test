@@ -235,3 +235,56 @@ body {
   text-transform: uppercase;
   text-align: center;
 }
+
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .history-text-upper {
+    font-size: 25px; /* Adjust the font size for smaller screens */
+    line-height: 35px; /* Adjust the line height for smaller screens */
+  }
+  
+  .history-text-lower {
+    font-size: 25px; /* Adjust the font size for smaller screens */
+    line-height: 35px; /* Adjust the line height for smaller screens */
+    margin-left: 55px; /* Adjust the margin-left value for spacing */
+  }
+  
+  .history-shape {
+    width: 200px; /* Adjust the width for smaller screens */
+    height: 83px; /* Adjust the height for smaller screens */
+    margin-left: 75px; /* Adjust the margin-left value for spacing */
+    margin-top: -83px; /* Adjust the margin-top value for spacing */
+  }
+  
+  .history-shape-text {
+    font-size: 45px; /* Adjust the font size for smaller screens */
+    line-height: 42px; /* Adjust the line height for smaller screens */
+    margin-left: 150px; /* Adjust the margin-left value for spacing */
+    margin-top: -95px; /* Adjust the margin-top value for spacing */
+  }
+
+  .text-upper {
+    font-size: 35px; /* Adjust the font size for smaller screens */
+    margin-left: 15px; /* Adjust the margin-left value for spacing */
+  }
+  
+  .text-lower {
+    font-size: 35px; /* Adjust the font size for smaller screens */
+    margin-left: 20px; /* Adjust the margin-left value for spacing */
+  }
+  
+  .shape {
+    width: 300px; /* Adjust the width for smaller screens */
+    height: 115px; /* Adjust the height for smaller screens */
+    margin-left: 20px; /* Adjust the margin-left value for spacing */
+    margin-top: 30px; /* Adjust the margin-top value for spacing */
+  }
+  
+  .shape-text {
+    font-size: 65px; /* Adjust the font size for smaller screens */
+    margin-left: 80px; /* Adjust the margin-left value for spacing */
+    margin-top: -120px; /* Adjust the margin-top value for spacing */
+  }
+  
+}

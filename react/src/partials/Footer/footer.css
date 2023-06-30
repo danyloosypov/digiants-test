@@ -88,3 +88,23 @@
     color: #FFF;
     margin-right: 15px; /* Adjust the spacing between the icon and text */
 }
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+
+    .footer-items {
+        flex-direction: column;
+        align-items: center; /* Horizontally align items */
+    }
+
+    .footer-logo {
+        padding-top: 40px;
+        font-size: 40px;
+        padding-bottom: 20px;
+    }
+
+    .footer-btn {
+        display: none; /* Hide the button on smaller screens */
+    }
+
+}
