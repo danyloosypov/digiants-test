@@ -38,4 +38,13 @@ export default class Service {
         }
     }
 
+    static async getWidgets() {
+        try {
+            const data = await axios.get('http://localhost/widgets/')
+            return data
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 }

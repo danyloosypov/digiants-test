@@ -23,7 +23,9 @@ Route::get('/bookings',[BookingController::class, 'index']);
 
 Route::post('/bookings/create', [BookingController::class, 'store']);
 
-Route::get('/takendates',[BookingController::class, 'getTakenDates']);
+Route::get('/takendates', [BookingController::class, 'getTakenDates']);
+
+Route::get('/widgets', [BookingController::class, 'getWidgets']);
 
 Route::delete('/bookings/delete/{id}', [BookingController::class, 'destroy']);
 

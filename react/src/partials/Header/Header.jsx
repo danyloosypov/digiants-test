@@ -1,15 +1,16 @@
 import React from 'react'
 import styles from './header.css'
 
-const Header = () => {
+const Header = ({phone, logo}) => {
+
   return (
     <div className="header-container">
       <div className='header-items'>
         <div className="header-item header-phone">
-          +38 (044) 299 27 66
+          {phone?.body}
         </div>
         <div className="header-item header-logo">
-          Hotel Logo
+          {logo?.body}
         </div>
         <div className='header-item'>
           <button className="header-btn">

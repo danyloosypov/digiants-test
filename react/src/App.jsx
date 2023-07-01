@@ -11,6 +11,7 @@ import Loading from './components/Loading/Loading'
 
 function App() {
   const [bookings, setBookings] = useState([]);
+  const [widgets, setWidgets] = useState([]);
   const [takenDates, setTakenDates] = useState([]);
   const [arrivalDate, setArrivalDate]= useState(null);
   const [departureDate, setDepartureDate]= useState(null);
@@ -25,6 +26,13 @@ function App() {
       setBookings(result);
       setIsLoading(false);
     };
+    const fetchWidgets = async () => {
+      setIsLoading(true);
+      const result = await Service.getWidgets();
+      console.log("widgets", result.data);
+      setWidgets(result.data);
+      setIsLoading(false);
+    };
     const getTakeDates = async () => {
       setIsLoading(true);
       const result = await Service.getTakenDates();
@@ -32,6 +40,7 @@ function App() {
       setIsLoading(false);
     };
     getTakeDates();
+    fetchWidgets();
     fetchBookings();
   }, []);
 
@@ -128,7 +137,12 @@ function App() {
   
   return (
     <div className='app'>
-      <Header/>
+      {widgets.length > 0 && (
+        <Header
+          phone={widgets.find(widget => widget.title === 'phone')}
+          logo={widgets.find(widget => widget.title === 'hotelLogo')}
+        />
+      )}
       {isLoading && <Loading />}
         <div className='container'>
           <div className="logo-text">
@@ -142,7 +156,10 @@ function App() {
 
             </div>
             <div className='shape-text'>
-              в Hotel logo
+            {widgets.length > 0 && (
+              <span>в {widgets.find(widget => widget.title === 'hotelLogo')?.body}</span>
+            )}
+              
             </div>
           </div>
           <div className="booking-form">
@@ -246,7 +263,13 @@ function App() {
           </table>
           </div>
         </div>
-      <Footer/>
+        {widgets.length > 0 && (
+        <Footer
+          phone={widgets.find(widget => widget.title === 'phone')}
+          logo={widgets.find(widget => widget.title === 'hotelLogo')}
+          address={widgets.find(widget => widget.title === 'address')}
+        />
+      )}
     </div>
   )
 }

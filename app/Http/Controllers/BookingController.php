@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking; // Assuming you have a Booking model
+use App\Models\Widget;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 
@@ -37,6 +38,11 @@ class BookingController extends Controller
             $disabledDates = array_merge($disabledDates, $datesInRange);
         }
         return response()->json($disabledDates);
+    }
+
+    public function getWidgets() {
+        $widgets = Widget::all();
+        return response()->json($widgets);
     }
 
     /**
